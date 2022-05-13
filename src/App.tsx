@@ -1,12 +1,11 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
 
 function App() {
-
-  const handleShowModal = (message: string) => ()  => {
+  const handleShowModal = (message: string) => () => {
     alert(message);
-  }
+  };
   return (
     <div className="App">
       <header className="App-header">
@@ -14,7 +13,7 @@ function App() {
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
-        <button onClick={handleShowModal('modal opened')}>Show modal</button>
+        <button onClick={handleShowModal("modal opened")}>Show modal</button>
         <a
           className="App-link"
           href="https://reactjs.org"
