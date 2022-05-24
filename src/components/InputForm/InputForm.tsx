@@ -1,32 +1,47 @@
 import React from "react";
 import { FormValueState, useForm } from "../../hooks/useForm";
+import { Box, Button, TextField } from "@mui/material";
 
 const InputForm = () => {
-  const [formValue, handleInputChange, handleSubmit, errors] = useForm();
-
-  const isFormReadyToSubmit = Object.values(errors).some((el) => el.length > 0);
+  const [
+    formValue,
+    handleInputChange,
+    handleSubmit,
+    errors,
+    isFormReadyToSubmit,
+  ] = useForm();
 
   const onFormSubmit = (data: FormValueState) => {
-    console.log(data);
+    // window.localStorage.setItem("username", JSON.stringify(data));
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit(onFormSubmit)}>
-        <input
-          type="text"
+    <form onSubmit={handleSubmit(onFormSubmit)}>
+      <Box
+        sx={{
+          alignItems: "center",
+          flexDirection: "column",
+          display: "flex",
+          gap: "10px",
+        }}
+      >
+        <TextField
+          error={isFormReadyToSubmit}
+          label="Username"
           name={"username"}
+          helperText={errors.username}
           value={formValue.username}
           onChange={handleInputChange}
         />
-        {isFormReadyToSubmit && (
-          <p style={{ color: "red" }}>{errors.username}</p>
-        )}
-        <button disabled={isFormReadyToSubmit} type="submit">
+        <Button
+          variant="contained"
+          disabled={isFormReadyToSubmit}
+          type="submit"
+        >
           Submit form
-        </button>
-      </form>
-    </div>
+        </Button>
+      </Box>
+    </form>
   );
 };
 

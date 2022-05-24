@@ -19,8 +19,7 @@ export const useForm = () => {
     username: "",
   });
 
-  const noErrors = !Object.values(errors).some(Boolean);
-  console.log(noErrors);
+  const isFormReadyToSubmit = Object.values(errors).some((el) => el.length > 0);
 
   useEffect(() => {
     setErrors(validate(formValue));
@@ -31,9 +30,7 @@ export const useForm = () => {
       if (event && typeof event.preventDefault() === "function") {
         event.preventDefault();
       }
-      if (noErrors) {
-        onSubmit(formValue);
-      }
+      onSubmit(formValue);
     };
   };
 
@@ -48,5 +45,11 @@ export const useForm = () => {
     []
   );
 
-  return [formValue, handleInputChange, handleSubmit, errors] as const;
+  return [
+    formValue,
+    handleInputChange,
+    handleSubmit,
+    errors,
+    isFormReadyToSubmit,
+  ] as const;
 };
