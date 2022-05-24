@@ -1,52 +1,31 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { FormValueState, useForm } from "../../hooks/useForm";
 
-interface InputFormProps {}
+const InputForm = () => {
+  const [formValue, handleInputChange, handleSubmit, errors] = useForm();
 
-const InputForm = (props?: InputFormProps) => {
-  const [displayError, setDisplayError] = useState<boolean>(false);
-  const [inputValue, setInputValue] = useState<string>("");
-  const [errorMessage, setErrorMessage] = useState<string>("");
+  const isFormReadyToSubmit = Object.values(errors).some((el) => el.length > 0);
 
-  const formReadyToSubmit = displayError || !inputValue;
-
-  const handleSubmitForm = () => {
-    window.localStorage.setItem("inputValue", JSON.stringify(inputValue));
+  const onFormSubmit = (data: FormValueState) => {
+    console.log(data);
   };
 
-  useEffect(() => {
-    const inputValueFromStorage = window.localStorage.getItem(
-      JSON.parse("inputValue")
-    );
-
-    console.log(inputValueFromStorage);
-
-    // if (Boolean(inputValueFromStorage)) {
-    //   setInputValue(inputValueFromStorage);
-    // }
-  }, []);
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const messageLength = event.target.value.length;
-    setInputValue(event.target.value);
-    if (messageLength < 3 || messageLength > 20) {
-      if (messageLength < 3) {
-        setErrorMessage("User name to short");
-      }
-      if (messageLength > 20) {
-        setErrorMessage("User name to long");
-      }
-      setDisplayError(true);
-    } else {
-      setDisplayError(false);
-    }
-  };
   return (
     <div>
-      <input value={inputValue} onChange={handleInputChange} type="text" />
-      {displayError && <p style={{ color: "red" }}>{errorMessage}</p>}
-      <button onClick={handleSubmitForm} disabled={formReadyToSubmit}>
-        submit data
-      </button>
+      <form onSubmit={handleSubmit(onFormSubmit)}>
+        <input
+          type="text"
+          name={"username"}
+          value={formValue.username}
+          onChange={handleInputChange}
+        />
+        {isFormReadyToSubmit && (
+          <p style={{ color: "red" }}>{errors.username}</p>
+        )}
+        <button disabled={isFormReadyToSubmit} type="submit">
+          Submit form
+        </button>
+      </form>
     </div>
   );
 };
