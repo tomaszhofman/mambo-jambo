@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FormValueState, useForm } from "../../hooks/useForm";
 import { Box, Button, TextField } from "@mui/material";
 
@@ -12,7 +12,7 @@ const InputForm = () => {
   ] = useForm();
 
   const onFormSubmit = (data: FormValueState) => {
-    // window.localStorage.setItem("username", JSON.stringify(data));
+    window.localStorage.setItem("username", JSON.stringify(data));
   };
 
   return (

@@ -22,6 +22,13 @@ export const useForm = () => {
   const isFormReadyToSubmit = Object.values(errors).some((el) => el.length > 0);
 
   useEffect(() => {
+    const itemsFromStorage = window.localStorage.getItem("username");
+    if (itemsFromStorage) {
+      setFormValue(JSON.parse(itemsFromStorage));
+    }
+  }, []);
+
+  useEffect(() => {
     setErrors(validate(formValue));
   }, [formValue]);
 
