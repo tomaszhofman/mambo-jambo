@@ -5,7 +5,7 @@ enum Routes {
 }
 
 export const routes = {
-  LandingPage: `${Routes.LandingPage}`,
-  About: `${Routes.About}`,
-  Contact: `${Routes.Contact}`,
+  LandingPage: `/${Routes.LandingPage}`,
+  About: `/${Routes.About}`,
+  Contact: `/${Routes.Contact}`,
 };
