@@ -1,32 +1,21 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import { InputForm } from "./components/InputForm";
-import { Box, Button } from "@mui/material";
+import { Route, Routes } from "react-router-dom";
+import { routes } from "./routing";
+import Contact from "./pages/Contact";
+import Home from "./pages/Home";
+import Navigation from "./components/Navigation/Navigation";
 
 function App() {
-  const handleShowModal = (message: string) => () => {
-    alert(message);
-  };
   return (
-    <div className="App">
-      <h1>React mambo jumbo</h1>
-      <main className="App-header">
-        <Box
-          sx={{
-            flexDirection: "column",
-            justifyContent: "space-between",
-            display: "flex",
-            height: "60vh",
-          }}
-        >
-          <InputForm />
-          <Button variant="contained" onClick={handleShowModal("modal opened")}>
-            Show modal
-          </Button>
-        </Box>
-      </main>
-    </div>
+    <>
+      <Navigation />
+      <Routes>
+        <Route path={routes.Contact} element={<Contact />}></Route>
+        <Route index element={<Home />} />
+        <Route path="*" element={<div>404</div>} />
+      </Routes>
+    </>
   );
 }
 
