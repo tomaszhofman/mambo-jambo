@@ -64,6 +64,7 @@ const Navigation = () => {
           <Link to={routes.About}>About</Link>
           <Link to={routes.Contact}>Form</Link>
           <Link to={routes.LandingPage}>Policy</Link>
+          <Link to={routes.Showcase}>Showacase</Link>
         </>
       ) : (
         <BasicMenu />
